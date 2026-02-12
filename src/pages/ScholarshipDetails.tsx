@@ -1,5 +1,9 @@
-import { useParams, Link } from "react-router-dom";
+"use client";
+
+import { useParams } from "next/navigation";
+import Link from "next/link";
 import { useState, useEffect } from "react";
+import Head from "next/head";
 import { ArrowLeft, Calendar, MapPin, GraduationCap, Building2, ExternalLink, Clock, DollarSign, BadgeCheck, Award } from "lucide-react";
 import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
@@ -14,7 +18,8 @@ import {
 import { fetchScholarshipById, type Scholarship } from "@/data/scholarships";
 
 const ScholarshipDetails = () => {
-  const { id } = useParams();
+  const params = useParams();
+  const id = Array.isArray(params?.id) ? params.id[0] : params?.id;
   const [scholarship, setScholarship] = useState<Scholarship | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -37,25 +42,6 @@ const ScholarshipDetails = () => {
 
     loadScholarship();
   }, [id]);
-
-  // SEO Meta Tags
-  useEffect(() => {
-    if (scholarship) {
-      document.title = `${scholarship.title} - ScholarBridge.com`;
-      
-      const metaDescription = document.querySelector('meta[name="description"]');
-      if (metaDescription) {
-        metaDescription.setAttribute("content", `Apply for ${scholarship.title} from ${scholarship.organization}. ${scholarship.description?.substring(0, 150)}...`);
-      }
-
-      const ogTitle = document.querySelector('meta[property="og:title"]');
-      if (ogTitle) {
-        ogTitle.setAttribute("content", `${scholarship.title} - ScholarBridge`);
-      }
-    } else {
-      document.title = "Scholarship Details - ScholarBridge.com";
-    }
-  }, [scholarship]);
 
   if (loading) {
     return (
@@ -83,7 +69,7 @@ const ScholarshipDetails = () => {
               The scholarship you're looking for doesn't exist or has been removed.
             </p>
             <Button asChild>
-              <Link to="/">
+              <Link href="/">
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Back to Home
               </Link>
@@ -182,13 +168,22 @@ const ScholarshipDetails = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Head>
+        <title>{scholarship ? `${scholarship.title} - ScholarBridge.com` : "Scholarship Details - ScholarBridge.com"}</title>
+        <meta name="description" content={scholarship ? `Apply for ${scholarship.title} from ${scholarship.organization}. ${scholarship.description?.substring(0, 150)}...` : "View scholarship details on ScholarBridge.com"} />
+        <meta name="keywords" content={scholarship ? `${scholarship.title}, ${scholarship.organization}, ${scholarship.country}, ${scholarship.field}, scholarship` : "scholarship details"} />
+        <meta property="og:title" content={scholarship ? `${scholarship.title} - ScholarBridge` : "Scholarship Details"} />
+        <meta property="og:description" content={scholarship?.description?.substring(0, 200) || "Scholarship opportunity details"} />
+        <meta property="og:type" content="article" />
+        {scholarship && <link rel="canonical" href={`https://scholarbridge.com/scholarship/${scholarship.id}`} />}
+      </Head>
       <Header />
 
       <main className="py-8 md:py-12">
         <div className="container">
           {/* Back Button */}
           <Button variant="ghost" asChild className="mb-6 -ml-2">
-            <Link to="/search">
+            <Link href="/search">
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to Listings
             </Link>
@@ -388,7 +383,7 @@ const ScholarshipDetails = () => {
                   </a>
                 </Button>
                 <Button variant="outline" size="lg" className="w-full" asChild>
-                  <Link to="/search">
+                  <Link href="/search">
                     <ArrowLeft className="mr-2 h-4 w-4" />
                     Back to Listings
                   </Link>
@@ -410,12 +405,12 @@ const ScholarshipDetails = () => {
               <span className="font-display font-semibold text-foreground">ScholarBridge</span>
             </div>
             <nav className="flex items-center gap-6 text-sm text-muted-foreground">
-              <Link to="/" className="hover:text-foreground transition-colors">Home</Link>
-              <Link to="/search" className="hover:text-foreground transition-colors">Browse</Link>
-              <Link to="/about" className="hover:text-foreground transition-colors">About</Link>
-              <Link to="/contact" className="hover:text-foreground transition-colors">Contact</Link>
-              <Link to="/privacy" className="hover:text-foreground transition-colors">Privacy</Link>
-              <Link to="/terms" className="hover:text-foreground transition-colors">Terms</Link>
+              <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
+              <Link href="/search" className="hover:text-foreground transition-colors">Browse</Link>
+              <Link href="/about" className="hover:text-foreground transition-colors">About</Link>
+              <Link href="/contact" className="hover:text-foreground transition-colors">Contact</Link>
+              <Link href="/privacy" className="hover:text-foreground transition-colors">Privacy</Link>
+              <Link href="/terms" className="hover:text-foreground transition-colors">Terms</Link>
             </nav>
             <p className="text-sm text-muted-foreground">
               © 2026 ScholarBridge. All rights reserved.

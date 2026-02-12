@@ -1,3 +1,7 @@
+// This file is deprecated - the app now uses Next.js App Router
+// See src/app/layout.tsx and src/app/page.tsx instead
+
+/*
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -44,3 +48,8 @@ const App = () => (
 );
 
 export default App;
+*/
+
+export default function App() {
+  return null;
+}

@@ -1,6 +1,9 @@
+"use client";
+
 import { useState, useMemo, useEffect } from "react";
 import { ArrowRight, Search, Award, Globe, Users, TrendingUp, GraduationCap, BookOpen, Trophy } from "lucide-react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
+import Head from "next/head";
 import Header from "@/components/Header";
 import ScholarshipCard from "@/components/ScholarshipCard";
 import CategoryTabs from "@/components/CategoryTabs";
@@ -42,26 +45,6 @@ const Index = () => {
     setVisibleCount(12);
   }, [selectedCategory, selectedCountry, selectedLevel, selectedField]);
 
-  // SEO Meta Tags for homepage
-  useEffect(() => {
-    document.title = "ScholarBridge.com - Find Scholarships & Educational Funding Opportunities";
-    
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute("content", "Discover thousands of scholarships from top universities and institutions worldwide. ScholarBridge connects students with educational funding opportunities to achieve their dreams.");
-    }
-
-    const ogTitle = document.querySelector('meta[property="og:title"]');
-    if (ogTitle) {
-      ogTitle.setAttribute("content", "ScholarBridge.com - Your Bridge to Educational Success");
-    }
-
-    const ogDescription = document.querySelector('meta[property="og:description"]');
-    if (ogDescription) {
-      ogDescription.setAttribute("content", "Access 10,000+ scholarships from 50+ countries. Free scholarship search platform helping students find educational funding opportunities.");
-    }
-  }, []);
-
   const visibleScholarships = filteredScholarships.slice(0, visibleCount);
   const hasMore = visibleCount < filteredScholarships.length;
 
@@ -80,6 +63,18 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Head>
+        <title>ScholarBridge.com - Find Scholarships & Educational Funding Opportunities</title>
+        <meta name="description" content="Discover thousands of scholarships from top universities and institutions worldwide. ScholarBridge connects students with educational funding opportunities to achieve their dreams." />
+        <meta name="keywords" content="scholarships, education funding, student grants, university scholarships, study abroad, financial aid" />
+        <meta property="og:title" content="ScholarBridge.com - Your Bridge to Educational Success" />
+        <meta property="og:description" content="Access 10,000+ scholarships from 50+ countries. Free scholarship search platform helping students find educational funding opportunities." />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="ScholarBridge.com - Find Scholarships & Educational Funding" />
+        <meta name="twitter:description" content="Discover thousands of scholarships from top universities worldwide." />
+        <link rel="canonical" href="https://scholarbridge.com" />
+      </Head>
       <Header />
 
       {/* Hero Section */}
@@ -131,7 +126,7 @@ const Index = () => {
             {/* CTAs */}
             <div className="animate-fade-up animation-delay-600 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
               <Button size="lg" asChild className="group">
-                <Link to="/search">
+                <Link href="/search">
                   Explore Scholarships
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </Link>
@@ -205,7 +200,7 @@ const Index = () => {
                 {showFilters ? "Hide Filters" : "Show Filters"}
               </Button>
               <Button variant="ghost" size="sm" asChild className="text-primary">
-                <Link to="/search">
+                <Link href="/search">
                   View all
                   <ArrowRight className="ml-1 h-4 w-4" />
                 </Link>
@@ -351,12 +346,12 @@ const Index = () => {
               <span className="font-display font-semibold text-foreground">ScholarBridge</span>
             </div>
             <nav className="flex items-center gap-6 text-sm text-muted-foreground">
-              <Link to="/" className="hover:text-foreground transition-colors">Home</Link>
-              <Link to="/search" className="hover:text-foreground transition-colors">Browse</Link>
-              <Link to="/about" className="hover:text-foreground transition-colors">About</Link>
-              <Link to="/contact" className="hover:text-foreground transition-colors">Contact</Link>
-              <Link to="/privacy" className="hover:text-foreground transition-colors">Privacy</Link>
-              <Link to="/terms" className="hover:text-foreground transition-colors">Terms</Link>
+              <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
+              <Link href="/search" className="hover:text-foreground transition-colors">Browse</Link>
+              <Link href="/about" className="hover:text-foreground transition-colors">About</Link>
+              <Link href="/contact" className="hover:text-foreground transition-colors">Contact</Link>
+              <Link href="/privacy" className="hover:text-foreground transition-colors">Privacy</Link>
+              <Link href="/terms" className="hover:text-foreground transition-colors">Terms</Link>
             </nav>
             <p className="text-sm text-muted-foreground">
               © 2026 ScholarBridge. All rights reserved.

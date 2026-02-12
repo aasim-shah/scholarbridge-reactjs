@@ -44,7 +44,7 @@ export interface ScholarshipStats {
 }
 
 // ── API Base URL ────────────────────────────────────────────────────
-const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:9003/api";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:9003/api";
 
 // ── API Helpers ─────────────────────────────────────────────────────
 

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { MapPin, Calendar, GraduationCap, Tag, DollarSign } from "lucide-react";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -80,7 +80,7 @@ const ScholarshipCard = ({ scholarship, index = 0 }: ScholarshipCardProps) => {
 
       <CardFooter className="pt-0">
         <Button asChild className="w-full" variant="outline" size="sm">
-          <Link to={`/scholarship/${scholarship.id}`}>
+          <Link href={`/scholarship/${scholarship.id}`}>
             View Details
           </Link>
         </Button>

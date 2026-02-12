@@ -1,5 +1,5 @@
 import { ArrowRight, Sparkles } from "lucide-react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 export function CTASection() {
@@ -20,7 +20,7 @@ export function CTASection() {
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Button size="lg" variant="secondary" asChild className="font-semibold">
-            <Link to="/search">
+            <Link href="/search">
               Browse Scholarships
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>

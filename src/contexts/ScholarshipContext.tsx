@@ -1,3 +1,5 @@
+'use client';
+
 import { createContext, useContext, useState, useEffect, useCallback, ReactNode } from "react";
 import {
   Scholarship,
@@ -53,6 +55,7 @@ export function ScholarshipProvider({ children }: { children: ReactNode }) {
       setCurrentPage(result.pagination.page);
       setTotalPages(result.pagination.totalPages);
     } catch (err: any) {
+      // eslint-disable-next-line no-console
       console.error("[ScholarshipContext] Fetch error:", err.message);
       setError("Unable to load scholarships. Please make sure the server is running.");
       setScholarships([]);
@@ -67,6 +70,7 @@ export function ScholarshipProvider({ children }: { children: ReactNode }) {
       const options = await fetchFilterOptions();
       setFilterOptions(options);
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.warn("[ScholarshipContext] Could not load filter options");
     }
   }, []);

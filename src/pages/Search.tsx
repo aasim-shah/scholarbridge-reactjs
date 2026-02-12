@@ -1,5 +1,9 @@
+"use client";
+
 import { useState, useEffect, useMemo } from "react";
-import { useSearchParams, Link } from "react-router-dom";
+import { useSearchParams } from "next/navigation";
+import Link from "next/link";
+import Head from "next/head";
 import { Search as SearchIcon, Award } from "lucide-react";
 import Header from "@/components/Header";
 import ScholarshipCard from "@/components/ScholarshipCard";
@@ -11,8 +15,8 @@ import { useScholarships } from "@/contexts/ScholarshipContext";
 
 const Search = () => {
   const { scholarships } = useScholarships();
-  const [searchParams] = useSearchParams();
-  const initialQuery = searchParams.get("q") || "";
+  const searchParams = useSearchParams();
+  const initialQuery = searchParams?.get("q") || "";
   
   const [searchQuery, setSearchQuery] = useState(initialQuery);
   const [selectedCountry, setSelectedCountry] = useState("");
@@ -26,26 +30,6 @@ const Search = () => {
   useEffect(() => {
     setSearchQuery(initialQuery);
   }, [initialQuery]);
-
-  // SEO Meta Tags
-  useEffect(() => {
-    document.title = "Search Scholarships - ScholarBridge.com | Find Your Perfect Match";
-    
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute("content", "Search and filter thousands of scholarships by country, field of study, academic level, and more. Find your perfect scholarship match on ScholarBridge.com");
-    }
-
-    const ogTitle = document.querySelector('meta[property="og:title"]');
-    if (ogTitle) {
-      ogTitle.setAttribute("content", "Search Scholarships - ScholarBridge.com");
-    }
-
-    const ogDescription = document.querySelector('meta[property="og:description"]');
-    if (ogDescription) {
-      ogDescription.setAttribute("content", "Browse and search our comprehensive database of scholarships. Filter by country, level, field of study and find opportunities that match your profile.");
-    }
-  }, []);
 
   const filteredScholarships = useMemo(() => {
     return scholarships.filter((scholarship) => {
@@ -91,6 +75,15 @@ const Search = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Head>
+        <title>Search Scholarships - ScholarBridge.com | Find Your Perfect Match</title>
+        <meta name="description" content="Search and filter thousands of scholarships by country, field of study, academic level, and more. Find your perfect scholarship match on ScholarBridge.com" />
+        <meta name="keywords" content="search scholarships, filter scholarships, find scholarships, scholarship database, study opportunities" />
+        <meta property="og:title" content="Search Scholarships - ScholarBridge.com" />
+        <meta property="og:description" content="Browse and search our comprehensive database of scholarships. Filter by country, level, field of study and find opportunities that match your profile." />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://scholarbridge.com/search" />
+      </Head>
       <Header />
 
       <main className="container py-8">
@@ -204,12 +197,12 @@ const Search = () => {
               <span className="font-display font-semibold text-foreground">ScholarBridge</span>
             </div>
             <nav className="flex items-center gap-6 text-sm text-muted-foreground">
-              <Link to="/" className="hover:text-foreground transition-colors">Home</Link>
-              <Link to="/search" className="hover:text-foreground transition-colors">Browse</Link>
-              <Link to="/about" className="hover:text-foreground transition-colors">About</Link>
-              <Link to="/contact" className="hover:text-foreground transition-colors">Contact</Link>
-              <Link to="/privacy" className="hover:text-foreground transition-colors">Privacy</Link>
-              <Link to="/terms" className="hover:text-foreground transition-colors">Terms</Link>
+              <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
+              <Link href="/search" className="hover:text-foreground transition-colors">Browse</Link>
+              <Link href="/about" className="hover:text-foreground transition-colors">About</Link>
+              <Link href="/contact" className="hover:text-foreground transition-colors">Contact</Link>
+              <Link href="/privacy" className="hover:text-foreground transition-colors">Privacy</Link>
+              <Link href="/terms" className="hover:text-foreground transition-colors">Terms</Link>
             </nav>
             <p className="text-sm text-muted-foreground">
               © 2026 ScholarBridge. All rights reserved.

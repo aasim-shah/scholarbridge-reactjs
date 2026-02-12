@@ -1,6 +1,9 @@
+"use client";
+
 import { useState } from "react";
 import { Plus, Pencil, Trash2, Search, Award, ArrowLeft } from "lucide-react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
+import Head from "next/head";
 import { useScholarships } from "@/contexts/ScholarshipContext";
 import { Scholarship, categories } from "@/data/scholarships";
 import Header from "@/components/Header";
@@ -55,8 +58,8 @@ const Admin = () => {
   const [search, setSearch] = useState("");
   const [formOpen, setFormOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
-  const [editingId, setEditingId] = useState<number | null>(null);
-  const [deletingId, setDeletingId] = useState<number | null>(null);
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
   const [form, setForm] = useState(emptyForm);
   const [saving, setSaving] = useState(false);
 
@@ -88,7 +91,7 @@ const Admin = () => {
     setFormOpen(true);
   };
 
-  const openDelete = (id: number) => {
+  const openDelete = (id: string) => {
     setDeletingId(id);
     setDeleteOpen(true);
   };
@@ -132,6 +135,11 @@ const Admin = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Head>
+        <title>Admin Panel - ScholarBridge.com | Manage Scholarships</title>
+        <meta name="description" content="Admin panel for managing scholarships on ScholarBridge.com. Add, edit, and delete scholarship listings." />
+        <meta name="robots" content="noindex, nofollow" />
+      </Head>
       <Header />
       <div className="container py-8">
         {/* Header */}
@@ -139,7 +147,7 @@ const Admin = () => {
           <div>
             <div className="flex items-center gap-2 mb-1">
               <Button variant="ghost" size="icon" asChild className="h-8 w-8">
-                <Link to="/"><ArrowLeft className="h-4 w-4" /></Link>
+                <Link href="/"><ArrowLeft className="h-4 w-4" /></Link>
               </Button>
               <h1 className="font-display text-2xl md:text-3xl font-bold text-foreground">
                 Admin Panel

@@ -1,31 +1,23 @@
+"use client";
+
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
+import Head from "next/head";
 import { Award, FileText, AlertCircle, Scale, CheckCircle } from "lucide-react";
 import Header from "@/components/Header";
 
 const Terms = () => {
-  useEffect(() => {
-    // SEO Meta Tags
-    document.title = "Terms of Service - ScholarBridge.com | User Agreement";
-    
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute("content", "Read ScholarBridge.com's terms of service to understand the rules and guidelines for using our scholarship platform.");
-    }
-
-    const ogTitle = document.querySelector('meta[property="og:title"]');
-    if (ogTitle) {
-      ogTitle.setAttribute("content", "Terms of Service - ScholarBridge.com");
-    }
-
-    const ogDescription = document.querySelector('meta[property="og:description"]');
-    if (ogDescription) {
-      ogDescription.setAttribute("content", "Terms and conditions for using ScholarBridge.com. Learn about your rights and responsibilities as a user.");
-    }
-  }, []);
-
   return (
     <div className="min-h-screen bg-background">
+      <Head>
+        <title>Terms of Service - ScholarBridge.com | User Agreement</title>
+        <meta name="description" content="Read ScholarBridge.com's terms of service to understand the rules and guidelines for using our scholarship platform." />
+        <meta name="keywords" content="terms of service, user agreement, terms and conditions, legal, usage policy" />
+        <meta property="og:title" content="Terms of Service - ScholarBridge.com" />
+        <meta property="og:description" content="Terms and conditions for using ScholarBridge.com. Learn about your rights and responsibilities as a user." />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://scholarbridge.com/terms" />
+      </Head>
       <Header />
 
       {/* Hero Section */}
@@ -323,7 +315,7 @@ const Terms = () => {
                   </p>
                   <p>
                     <strong className="text-foreground">Website:</strong>{" "}
-                    <Link to="/contact" className="text-primary hover:underline">
+                    <Link href="/contact" className="text-primary hover:underline">
                       Contact Form
                     </Link>
                   </p>
@@ -345,12 +337,12 @@ const Terms = () => {
               <span className="font-display font-semibold text-foreground">ScholarBridge</span>
             </div>
             <nav className="flex items-center gap-6 text-sm text-muted-foreground">
-              <Link to="/" className="hover:text-foreground transition-colors">Home</Link>
-              <Link to="/search" className="hover:text-foreground transition-colors">Browse</Link>
-              <Link to="/about" className="hover:text-foreground transition-colors">About</Link>
-              <Link to="/contact" className="hover:text-foreground transition-colors">Contact</Link>
-              <Link to="/privacy" className="hover:text-foreground transition-colors">Privacy</Link>
-              <Link to="/terms" className="hover:text-foreground transition-colors">Terms</Link>
+              <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
+              <Link href="/search" className="hover:text-foreground transition-colors">Browse</Link>
+              <Link href="/about" className="hover:text-foreground transition-colors">About</Link>
+              <Link href="/contact" className="hover:text-foreground transition-colors">Contact</Link>
+              <Link href="/privacy" className="hover:text-foreground transition-colors">Privacy</Link>
+              <Link href="/terms" className="hover:text-foreground transition-colors">Terms</Link>
             </nav>
             <p className="text-sm text-muted-foreground">
               © 2026 ScholarBridge. All rights reserved.

@@ -1,5 +1,10 @@
+'use client';
+
+"use client";
+
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Search, GraduationCap, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,12 +16,12 @@ const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
   const [registerOpen, setRegisterOpen] = useState(false);
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+      router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
     }
   };
 
@@ -25,7 +30,7 @@ const Header = () => {
       <header className="sticky top-0 z-50 w-full border-b border-border bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/80">
         <div className="container flex h-16 items-center justify-between gap-4">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2.5 shrink-0">
+          <Link href="/" className="flex items-center gap-2.5 shrink-0">
             <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
               <GraduationCap className="h-5 w-5 text-primary-foreground" />
             </div>
@@ -51,25 +56,25 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-1">
             <Button variant="ghost" size="sm" asChild>
-              <Link to="/">Home</Link>
+              <Link href="/">Home</Link>
             </Button>
             <Button variant="ghost" size="sm" asChild>
-              <Link to="/search">Browse</Link>
+              <Link href="/search">Browse</Link>
             </Button>
             <Button variant="ghost" size="sm" asChild>
-              <Link to="/about">About</Link>
+              <Link href="/about">About</Link>
             </Button>
             <Button variant="ghost" size="sm" asChild>
-              <Link to="/contact">Contact</Link>
+              <Link href="/contact">Contact</Link>
             </Button>
             <div className="w-px h-6 bg-border mx-2" />
             <ThemeToggle />
-            <Button variant="ghost" size="sm" onClick={() => setLoginOpen(true)}>
+            {/* <Button variant="ghost" size="sm" onClick={() => setLoginOpen(true)}>
               Login
             </Button>
             <Button size="sm" onClick={() => setRegisterOpen(true)}>
               Register
-            </Button>
+            </Button> */}
           </nav>
 
           {/* Mobile Menu Button */}
@@ -100,16 +105,16 @@ const Header = () => {
             </form>
             <nav className="flex flex-col gap-2">
               <Button variant="ghost" asChild className="justify-start" onClick={() => setMobileMenuOpen(false)}>
-                <Link to="/">Home</Link>
+                <Link href="/">Home</Link>
               </Button>
               <Button variant="ghost" asChild className="justify-start" onClick={() => setMobileMenuOpen(false)}>
-                <Link to="/search">Browse</Link>
+                <Link href="/search">Browse</Link>
               </Button>
               <Button variant="ghost" asChild className="justify-start" onClick={() => setMobileMenuOpen(false)}>
-                <Link to="/about">About</Link>
+                <Link href="/about">About</Link>
               </Button>
               <Button variant="ghost" asChild className="justify-start" onClick={() => setMobileMenuOpen(false)}>
-                <Link to="/contact">Contact</Link>
+                <Link href="/contact">Contact</Link>
               </Button>
               {/* <div className="flex gap-2 mt-2">
                 <Button 

@@ -1,31 +1,23 @@
+"use client";
+
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
+import Head from "next/head";
 import { Award, Shield, Lock, Eye, Database, Cookie } from "lucide-react";
 import Header from "@/components/Header";
 
 const Privacy = () => {
-  useEffect(() => {
-    // SEO Meta Tags
-    document.title = "Privacy Policy - ScholarBridge.com | Your Data Protection";
-    
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute("content", "Read ScholarBridge.com's privacy policy to understand how we collect, use, and protect your personal information. Your privacy is our priority.");
-    }
-
-    const ogTitle = document.querySelector('meta[property="og:title"]');
-    if (ogTitle) {
-      ogTitle.setAttribute("content", "Privacy Policy - ScholarBridge.com");
-    }
-
-    const ogDescription = document.querySelector('meta[property="og:description"]');
-    if (ogDescription) {
-      ogDescription.setAttribute("content", "Transparent privacy practices at ScholarBridge. Learn how we protect your data and respect your privacy.");
-    }
-  }, []);
-
   return (
     <div className="min-h-screen bg-background">
+      <Head>
+        <title>Privacy Policy - ScholarBridge.com | Your Data Protection</title>
+        <meta name="description" content="Read ScholarBridge.com's privacy policy to understand how we collect, use, and protect your personal information. Your privacy is our priority." />
+        <meta name="keywords" content="privacy policy, data protection, user privacy, information security, GDPR" />
+        <meta property="og:title" content="Privacy Policy - ScholarBridge.com" />
+        <meta property="og:description" content="Transparent privacy practices at ScholarBridge. Learn how we protect your data and respect your privacy." />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://scholarbridge.com/privacy" />
+      </Head>
       <Header />
 
       {/* Hero Section */}
@@ -270,7 +262,7 @@ const Privacy = () => {
                   </p>
                   <p>
                     <strong className="text-foreground">Website:</strong>{" "}
-                    <Link to="/contact" className="text-primary hover:underline">
+                    <Link href="/contact" className="text-primary hover:underline">
                       Contact Form
                     </Link>
                   </p>
@@ -292,12 +284,12 @@ const Privacy = () => {
               <span className="font-display font-semibold text-foreground">ScholarBridge</span>
             </div>
             <nav className="flex items-center gap-6 text-sm text-muted-foreground">
-              <Link to="/" className="hover:text-foreground transition-colors">Home</Link>
-              <Link to="/search" className="hover:text-foreground transition-colors">Browse</Link>
-              <Link to="/about" className="hover:text-foreground transition-colors">About</Link>
-              <Link to="/contact" className="hover:text-foreground transition-colors">Contact</Link>
-              <Link to="/privacy" className="hover:text-foreground transition-colors">Privacy</Link>
-              <Link to="/terms" className="hover:text-foreground transition-colors">Terms</Link>
+              <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
+              <Link href="/search" className="hover:text-foreground transition-colors">Browse</Link>
+              <Link href="/about" className="hover:text-foreground transition-colors">About</Link>
+              <Link href="/contact" className="hover:text-foreground transition-colors">Contact</Link>
+              <Link href="/privacy" className="hover:text-foreground transition-colors">Privacy</Link>
+              <Link href="/terms" className="hover:text-foreground transition-colors">Terms</Link>
             </nav>
             <p className="text-sm text-muted-foreground">
               © 2026 ScholarBridge. All rights reserved.

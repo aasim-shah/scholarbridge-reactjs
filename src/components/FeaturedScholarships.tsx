@@ -1,5 +1,5 @@
 import { Flame, ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -25,7 +25,7 @@ export function FeaturedScholarships() {
             </div>
           </div>
           <Button variant="ghost" size="sm" asChild className="text-primary">
-            <Link to="/search">
+            <Link href="/search">
               View all
               <ArrowRight className="ml-1 h-4 w-4" />
             </Link>
@@ -62,7 +62,7 @@ export function FeaturedScholarships() {
                     {scholarship.level}
                   </Badge>
                   <Button variant="ghost" size="sm" asChild className="text-primary p-0 h-auto">
-                    <Link to={`/scholarship/${scholarship.id}`}>
+                    <Link href={`/scholarship/${scholarship.id}`}>
                       View Details
                       <ArrowRight className="ml-1 h-3 w-3" />
                     </Link>

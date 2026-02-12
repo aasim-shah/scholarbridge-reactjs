@@ -1,5 +1,8 @@
+"use client";
+
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
+import Head from "next/head";
 import { Award, Mail, MapPin, Clock, Send } from "lucide-react";
 import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
@@ -16,26 +19,6 @@ const Contact = () => {
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  useEffect(() => {
-    // SEO Meta Tags
-    document.title = "Contact Us - ScholarBridge.com | Get in Touch";
-    
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute("content", "Contact ScholarBridge.com for questions about scholarships, partnership opportunities, or technical support. We're here to help you succeed.");
-    }
-
-    const ogTitle = document.querySelector('meta[property="og:title"]');
-    if (ogTitle) {
-      ogTitle.setAttribute("content", "Contact ScholarBridge - We're Here to Help");
-    }
-
-    const ogDescription = document.querySelector('meta[property="og:description"]');
-    if (ogDescription) {
-      ogDescription.setAttribute("content", "Have questions? Get in touch with the ScholarBridge team. Email us at info@ScholarBridge.com");
-    }
-  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -61,6 +44,15 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Head>
+        <title>Contact Us - ScholarBridge.com | Get in Touch</title>
+        <meta name="description" content="Contact ScholarBridge.com for questions about scholarships, partnership opportunities, or technical support. We're here to help you succeed." />
+        <meta name="keywords" content="contact scholarbridge, support, help, questions, partnership" />
+        <meta property="og:title" content="Contact ScholarBridge - We're Here to Help" />
+        <meta property="og:description" content="Have questions? Get in touch with the ScholarBridge team. Email us at info@ScholarBridge.com" />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://scholarbridge.com/contact" />
+      </Head>
       <Header />
 
       {/* Hero Section */}
@@ -150,7 +142,7 @@ const Contact = () => {
                   Before reaching out, check our FAQ section for quick answers to common questions.
                 </p>
                 <Button variant="outline" asChild>
-                  <Link to="/#faq">View FAQs</Link>
+                  <Link href="/#faq">View FAQs</Link>
                 </Button>
               </div>
             </div>
@@ -255,12 +247,12 @@ const Contact = () => {
               <span className="font-display font-semibold text-foreground">ScholarBridge</span>
             </div>
             <nav className="flex items-center gap-6 text-sm text-muted-foreground">
-              <Link to="/" className="hover:text-foreground transition-colors">Home</Link>
-              <Link to="/search" className="hover:text-foreground transition-colors">Browse</Link>
-              <Link to="/about" className="hover:text-foreground transition-colors">About</Link>
-              <Link to="/contact" className="hover:text-foreground transition-colors">Contact</Link>
-              <Link to="/privacy" className="hover:text-foreground transition-colors">Privacy</Link>
-              <Link to="/terms" className="hover:text-foreground transition-colors">Terms</Link>
+              <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
+              <Link href="/search" className="hover:text-foreground transition-colors">Browse</Link>
+              <Link href="/about" className="hover:text-foreground transition-colors">About</Link>
+              <Link href="/contact" className="hover:text-foreground transition-colors">Contact</Link>
+              <Link href="/privacy" className="hover:text-foreground transition-colors">Privacy</Link>
+              <Link href="/terms" className="hover:text-foreground transition-colors">Terms</Link>
             </nav>
             <p className="text-sm text-muted-foreground">
               © 2026 ScholarBridge. All rights reserved.
