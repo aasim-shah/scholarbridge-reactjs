@@ -6,7 +6,7 @@ import Header from "@/components/Header";
 
 export default function TermsPage() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background ">
       <Header />
 
       <main className="container py-12 md:py-16">
